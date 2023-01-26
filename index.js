@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 443;
+
+const cors = require('cors');
+app.use(cors());
 
 require('dotenv').config();
 
@@ -25,8 +28,8 @@ app.use((req, res, next) => {
 });
 
 app.post('/projetos', (req, res) => {
-    const { titulo, descricao, data, descricao_extendida, linguagens_utilizadas } = req.body;
-    pool.query('INSERT INTO projetos (titulo, descricao, data, descricao_extendida, linguagens_utilizadas) VALUES ($1, $2, $3, $4, $5)', [titulo, descricao, data, descricao_extendida, linguagens_utilizadas], (err, result) => {
+    const { titulo, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url} = req.body;
+    pool.query('INSERT INTO projetos (titulo, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url) VALUES ($1, $2, $3, $4, $5, $6, $7)', [titulo, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url], (err, result) => {
         if (err) {
             res.status(500).send(err.toString());
         } else {
@@ -70,8 +73,8 @@ app.delete('/projetos/:id', (req, res) => {
 
 app.put('/projetos/:id', (req, res) => {
     const { id } = req.params;
-    const { titulo, descricao, data, descricao_extendida, linguagens_utilizadas } = req.body;
-    pool.query('UPDATE projetos SET titulo = $1, descricao = $2, data = $3, descricao_extendida = $4, linguagens_utilizadas = $5 WHERE id = $6', [titulo, descricao, data, descricao_extendida, linguagens_utilizadas, id], (err, result) => {
+    const { titulo, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url } = req.body;
+    pool.query('UPDATE projetos SET titulo = $1, descricao = $2, data_criacao = $3, descricao_extendida = $4, tecnologias_utilizadas = $5, imagem_principal_url = $6, imagens_url = $7 WHERE id = $8', [titulo, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url, id], (err, result) => {
         if (err) {
             res.status(500).send(err.toString());
         } else {
@@ -82,5 +85,5 @@ app.put('/projetos/:id', (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`rodando em http://localhost:${port}`)
 });
