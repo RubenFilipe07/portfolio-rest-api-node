@@ -5,6 +5,8 @@ const port = 8080;
 const cors = require('cors');
 app.use(cors());
 
+const nodemailer = require('nodemailer');
+
 require('dotenv').config();
 
 const { Pool } = require('pg');
@@ -98,6 +100,34 @@ app.put('/projetos/:id', (req, res) => {
             res.json({ status: 'success', message: 'Projeto atualizado com sucesso' });
         }
     });
+});
+
+app.post('/email', (req, res) => {
+    const { name, email, message } = req.body;
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+
+    });
+  
+    const mailOptions = {
+      from: email,
+      to: process.env.RECEIVER_EMAIL,
+      subject: 'Contato do portfólio',
+      text: `Nomme: ${name} \nEmail: ${email} \nMensagem: ${message}`
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        res.status(500).send(error.toString());
+      } else {
+        res.json({ status: 'success', message: 'Email enviado com sucesso' });
+      }
+    });
+
 });
 
 
