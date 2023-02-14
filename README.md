@@ -25,3 +25,24 @@ Este é um projeto de API REST em Node.js que permite gerenciar envios de email 
   <li>Execute <code>node index.js</code> para iniciar a aplicação</li>
   <li>O projeto rodará em: <code>https://localhost:8080/</code></li>
 </ol>
+
+<h3>Tecnologias utilizadas:</h3>
+
+<a href="https://nodejs.org/">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
+</a> <br/>
+
+<a href="https://expressjs.com/">
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"/>
+</a> <br/>
+
+<a href="https://www.postgresql.org/">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=PostgreSQL&logoColor=white"/>
+</a> <br/>
+
+<a href="https://nodemailer.com/">
+  <img src="https://img.shields.io/badge/nodemailer-2babdf?style=for-the-badge&logoColor=white"/>
+</a> <br/>
+
+
+
