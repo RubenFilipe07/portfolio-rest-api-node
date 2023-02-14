@@ -11,6 +11,7 @@ Este é um projeto de API REST em Node.js que permite gerenciar envios de email 
 <code>POST /email</code>: envia um email <br/>
 
 <h3>arquivo .ENV</h3>
+<code>API_KEY</code>: Chave de autenticação autoriza a utilização da API por um cliente.<br/>
 <code>DATABASE_URL</code>:  URL que faz conexão com banco de dados. <br/>
 <code>EMAIL</code>:  Endereço de email  de origem que será utilizado para enviar os emails. <br/>
 <code>PASSWORD</code>:  Senha  do endereço de email que será utilizado para enviar os emails. <br/>
