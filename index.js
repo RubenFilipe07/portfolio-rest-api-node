@@ -67,6 +67,28 @@ app.get('/projetos', (req, res) => {
     });
 });
 
+app.delete('/projetos', (req, res) => {
+    const { titulo, url, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url} = req.body;
+    pool.query('DELETE FROM projetos WHERE titulo = $1 AND url = $2 AND descricao = $3 AND data_criacao = $4 AND descricao_extendida = $5 AND tecnologias_utilizadas = $6 AND imagem_principal_url = $7 AND imagens_url = $8', [titulo, url, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url], (err, result) => {
+        if (err) {
+            res.status(500).send(err.toString());
+        } else {
+            res.json({ status: 'success', message: 'Projeto deletado com sucesso' });
+        }
+    });
+});
+
+app.put('/projetos', (req, res) => {
+    const { id, titulo, url, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url} = req.body;
+    pool.query('UPDATE projetos SET titulo = $1, url =$2, descricao = $3, data_criacao = $4, descricao_extendida = $5, tecnologias_utilizadas = $6, imagem_principal_url = $7, imagens_url = $8 WHERE id = $9', [titulo, url, descricao, data_criacao, descricao_extendida, tecnologias_utilizadas, imagem_principal_url, imagens_url, id], (err, result) => {
+        if (err) {
+            res.status(500).send(err.toString());
+        } else {
+            res.json({ status: 'success', message: 'Projeto atualizado com sucesso' });
+        }
+    });
+});
+
 app.get('/projetos/:id', (req, res) => {
     const { id } = req.params;
     pool.query('SELECT * FROM projetos WHERE id = $1', [id], (err, result) => {
@@ -103,7 +125,7 @@ app.put('/projetos/:id', (req, res) => {
 });
 
 app.post('/email', (req, res) => {
-    const { name, email, message } = req.body;
+    const { nome, email, mensagem } = req.body;
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -117,14 +139,14 @@ app.post('/email', (req, res) => {
       from: email,
       to: process.env.RECEIVER_EMAIL,
       subject: 'Contato do portfólio',
-      text: `Nomme: ${name} \nEmail: ${email} \nMensagem: ${message}`
+      text: `Nome: ${nome} \nEmail: ${email} \nMensagem: ${mensagem}`
     };
   
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         res.status(500).send(error.toString());
       } else {
-        res.json({ status: 'success', message: 'Email enviado com sucesso' });
+        res.json({ status: 'success', mensagem: 'Email enviado com sucesso' });
       }
     });
 
