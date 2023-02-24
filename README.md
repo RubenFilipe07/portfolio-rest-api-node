@@ -2,12 +2,25 @@
 <h3>Introdução</h3>
 Este é um projeto de API REST em Node.js que permite gerenciar envios de email e os projetos exibidos em meu portfólio. Ele foi desenvolvido utilizando Express, CORS, Nodemailer, dotenv, e um banco de dados PostgreSQL.
 
+<h3>Atributos</h3>
+<code>id</code> (number): ID do projeto no banco de dados. </br>
+<code>titulo</code> (string): Título do projeto.  </br>
+<code>url</code> (string): URL do projeto.  </br> 
+<code>descricao</code> (string): Descrição breve do projeto.  </br>
+<code>data_criacao</code> (string): Data de criação do projeto no formato "dd-mm-yyyy".  </br>
+<code>descricao_extendida</code> (string): Descrição detalhada do projeto.  </br>
+<code>tecnologias_utilizadas</code> (array de strings): Lista de tecnologias utilizadas no projeto.  </br>
+<code>imagem_principal_url</code> (string): URL da imagem principal do projeto.  </br>
+<code>imagens_url</code> (array de strings): Lista de URLs das imagens adicionais do projeto.  </br>
+
 <h3>Métodos</h3>
 <code>POST /projetos</code>: cria um novo projeto e o adiciona ao banco de dados <br/>
 <code>GET /projetos</code>: entrega uma lista de todos os projetos no banco de dados <br/>
 <code>GET /projetos/:id</code>: entrega um projeto específico com base em seu ID <br/>
 <code>DELETE /projetos/:id</code>: exclui um projeto específico com base em seu ID <br/>
+<code>DELETE /projetos/</code>: exclui um projeto específico com base nos atributos <br/>
 <code>PUT /projetos/:id</code>: atualiza um projeto específico com base em seu ID <br/>
+<code>PUT /projetos/</code>: atualiza um projeto específico com base nos atributos <br/>
 <code>POST /email</code>: envia um email <br/>
 
 <h3>arquivo .ENV</h3>
